@@ -1,0 +1,51 @@
+# docker pull registry.saas.hand-china.com/google_containers/kubernetes-dashboard-init-amd64:v1.0.0
+
+# docker tag registry.saas.hand-china.com/google_containers/kubernetes-dashboard-init-amd64:v1.0.0 gcr.io/google_containers/kubernetes-dashboard-init-amd64:v1.0.0
+
+
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+
+
+sudo: required
+language: python
+
+env:
+  global:
+    - DOCKER_REGISTRY_HOST=registry.saas.hand-china.com
+    - DOCKER_USER=yunqiang.wu
+    - DOCKER_PWD=Wu950429
+    - DOCKER_FROM_PROJECT=gcr.io/google_containers
+    - DOCKER_TO_PROJECT=registry.saas.hand-china.com/google_containers2
+    - COPY_IMAGES=kubernetes-dashboard-amd64:v1.8.0,kubernetes-dashboard-init-amd64
+
+services:
+  - docker
+
+
+
+before_install:
+  - docker login $DOCKER_REGISTRY_HOST -u $DOCKER_USER -p $DOCKER_PWD
+  - |
+    if [[ x$COPY_IMAGES == x ]]; then 
+      export COPY_IMAGES=mysql 
+      echo "not set COPY_IMAGES envirmonent"
+      exit 1
+    fi
+
+script:
+  - OLD_IFS="$IFS"
+  #设置分隔符
+  - IFS=","
+  #如下会自动分隔
+  - COPY_IMAGES_TO_ARR=($MAIL_TO_ARR_ARG)
+  #恢复原来的分隔符
+  - IFS="$OLD_IFS"
+  - |
+    for s in ${COPY_IMAGES_TO_ARR[@]}
+    do
+      docker pull ${DOCKER_FROM_PROJECT}/${s}
+      docker tag ${DOCKER_FROM_PROJECT}/${s} ${DOCKER_TO_PROJECT}/${s}
+      docker push ${DOCKER_TO_PROJECT}/${s}
+    done
+  - docker images -a
+
