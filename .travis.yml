@@ -24,7 +24,7 @@ services:
 
 
 before_install:
-  # - docker login $DOCKER_REGISTRY_HOST -u $DOCKER_USER -p $DOCKER_PWD
+  - docker login $DOCKER_REGISTRY_HOST -u $DOCKER_USER -p $DOCKER_PWD
   - |
     if [[ x$COPY_IMAGES == x ]]; then 
       export COPY_IMAGES=mysql,redis
@@ -49,7 +49,8 @@ script:
     do
       docker pull ${DOCKER_FROM_PROJECT}/${s}
       docker tag ${DOCKER_FROM_PROJECT}/${s} ${DOCKER_TO_PROJECT}/${s}
-      sh -c "docker push ${DOCKER_TO_PROJECT}/${s}"
+      docker push ${DOCKER_TO_PROJECT}/${s}
+      # sh -c "docker push ${DOCKER_TO_PROJECT}/${s}"
       echo docker push ${DOCKER_TO_PROJECT}/${s}  from   ${DOCKER_FROM_PROJECT}/${s}
     done
   - docker images -a
