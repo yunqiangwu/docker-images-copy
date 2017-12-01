@@ -4,13 +4,13 @@
 
 # docker tag registry.saas.hand-china.com/google_containers/kubernetes-dashboard-init-amd64:v1.0.0 gcr.io/google_containers/kubernetes-dashboard-init-amd64:v1.0.0
 
-
+# curl -s https://raw.githubusercontent.com/yunqiangwu/docker-images-copy/master/docker-image-rename.sh | sh
 
 
 DOCKER_TO_PROJECT=gcr.io/google_containers
 DOCKER_FROM_PROJECT=registry.saas.hand-china.com/google_containers2
-RENAME_IMAGES=kube-addon-manager:v6.4-beta.2
-# kubernetes-dashboard-amd64:v1.8.0,pause-amd64:3.0
+RENAME_IMAGES=kube-addon-manager:v6.4-beta.2,kubernetes-dashboard-amd64:v1.8.0,pause-amd64:3.0
+# 
 
 
 OLD_IFS="$IFS"

@@ -16,8 +16,8 @@ env:
     - DOCKER_PWD=Wu950429
     - DOCKER_FROM_PROJECT=gcr.io/google_containers
     - DOCKER_TO_PROJECT=registry.saas.hand-china.com/google_containers2
-    - COPY_IMAGES=kube-addon-manager:v6.4-beta.2
-    # kubernetes-dashboard-amd64:v1.8.0,pause-amd64:3.0
+    - COPY_IMAGES=kube-addon-manager:v6.4-beta.2,kubernetes-dashboard-amd64:v1.8.0,pause-amd64:3.0
+    # 
 
 services:
   - docker
