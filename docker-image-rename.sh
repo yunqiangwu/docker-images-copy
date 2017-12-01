@@ -7,28 +7,20 @@
 
 
 
-
-  COPY_IMAGES=kubernetes-dashboard-amd64:v1.8.0,pause-amd64:3.0
-
-
-  - OLD_IFS="$IFS"
-  - IFS=","
-  - COPY_IMAGES_TO_ARR=($COPY_IMAGES)
-  - IFS="$OLD_IFS"
-  # - s=kubernetes-dashboard-amd64:v1.8.0
-  # - docker pull ${DOCKER_FROM_PROJECT}/${s}
-  # - docker tag ${DOCKER_FROM_PROJECT}/${s} ${DOCKER_TO_PROJECT}/${s}
-  # - docker push ${DOCKER_TO_PROJECT}/${s}
+DOCKER_TO_PROJECT=gcr.io/google_containers
+DOCKER_FROM_PROJECT=registry.saas.hand-china.com/google_containers2
+RENAME_IMAGES=kubernetes-dashboard-amd64:v1.8.0,pause-amd64:3.0
 
 
+OLD_IFS="$IFS"
+IFS=","
+RENAME_IMAGES_TO_ARR=($RENAME_IMAGES)
+IFS="$OLD_IFS"
 
-  - |
-    for s in ${COPY_IMAGES_TO_ARR[@]}
-    do
-      docker pull ${DOCKER_FROM_PROJECT}/${s}
-      docker tag ${DOCKER_FROM_PROJECT}/${s} ${DOCKER_TO_PROJECT}/${s}
-      docker push ${DOCKER_TO_PROJECT}/${s}
-      echo docker push ${DOCKER_TO_PROJECT}/${s}  from   ${DOCKER_FROM_PROJECT}/${s}
-    done
-  - docker images -a
+for s in ${RENAME_IMAGES_TO_ARR[@]}
+do
+  docker pull ${DOCKER_FROM_PROJECT}/${s}
+  docker tag ${DOCKER_FROM_PROJECT}/${s} ${DOCKER_TO_PROJECT}/${s}
+done
+docker images -a 
 
