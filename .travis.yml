@@ -34,11 +34,8 @@ before_install:
 
 script:
   - OLD_IFS="$IFS"
-  #设置分隔符
   - IFS=","
-  #如下会自动分隔
-  - COPY_IMAGES_TO_ARR=($MAIL_TO_ARR_ARG)
-  #恢复原来的分隔符
+  - COPY_IMAGES_TO_ARR=($COPY_IMAGES)
   - IFS="$OLD_IFS"
   - |
     for s in ${COPY_IMAGES_TO_ARR[@]}
