@@ -16,7 +16,7 @@ env:
     - DOCKER_PWD=Wu950429
     - DOCKER_FROM_PROJECT=gcr.io/google_containers
     - DOCKER_TO_PROJECT=registry.saas.hand-china.com/google_containers2
-    - COPY_IMAGES=kubernetes-dashboard-amd64:v1.8.0,kubernetes-dashboard-init-amd64
+    # - COPY_IMAGES=kubernetes-dashboard-amd64:v1.8.0,kubernetes-dashboard-init-amd64
 
 services:
   - docker
@@ -27,7 +27,7 @@ before_install:
   # - docker login $DOCKER_REGISTRY_HOST -u $DOCKER_USER -p $DOCKER_PWD
   - |
     if [[ x$COPY_IMAGES == x ]]; then 
-      export COPY_IMAGES=mysql 
+      export COPY_IMAGES=mysql,redis
       echo "not set COPY_IMAGES envirmonent"
       exit 1
     fi
@@ -49,8 +49,7 @@ script:
     do
       # docker pull ${DOCKER_FROM_PROJECT}/${s}
       # docker tag ${DOCKER_FROM_PROJECT}/${s} ${DOCKER_TO_PROJECT}/${s}
-      # docker push ${DOCKER_TO_PROJECT}/${s}
-      echo IMAGE=$s
+      echo docker push ${DOCKER_TO_PROJECT}/${s}
     done
   - docker images -a
 
