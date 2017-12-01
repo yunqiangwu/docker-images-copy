@@ -37,12 +37,19 @@ script:
   - IFS=","
   - COPY_IMAGES_TO_ARR=($COPY_IMAGES)
   - IFS="$OLD_IFS"
-  - |
-    for s in ${COPY_IMAGES_TO_ARR[@]}
-    do
-      docker pull ${DOCKER_FROM_PROJECT}/${s}
-      docker tag ${DOCKER_FROM_PROJECT}/${s} ${DOCKER_TO_PROJECT}/${s}
-      docker push ${DOCKER_TO_PROJECT}/${s}
-    done
-  - docker images -a
+  - s=kubernetes-dashboard-amd64:v1.8.0
+  - docker pull ${DOCKER_FROM_PROJECT}/${s}
+  - docker tag ${DOCKER_FROM_PROJECT}/${s} ${DOCKER_TO_PROJECT}/${s}
+  - docker push ${DOCKER_TO_PROJECT}/${s}
+
+
+
+  # - |
+  #   for s in ${COPY_IMAGES_TO_ARR[@]}
+  #   do
+  #     docker pull ${DOCKER_FROM_PROJECT}/${s}
+  #     docker tag ${DOCKER_FROM_PROJECT}/${s} ${DOCKER_TO_PROJECT}/${s}
+  #     docker push ${DOCKER_TO_PROJECT}/${s}
+  #   done
+  # - docker images -a
 
