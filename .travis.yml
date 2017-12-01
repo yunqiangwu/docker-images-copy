@@ -16,7 +16,7 @@ env:
     - DOCKER_PWD=Wu950429
     - DOCKER_FROM_PROJECT=gcr.io/google_containers
     - DOCKER_TO_PROJECT=registry.saas.hand-china.com/google_containers2
-    # - COPY_IMAGES=kubernetes-dashboard-amd64:v1.8.0,kubernetes-dashboard-init-amd64
+    - COPY_IMAGES=kubernetes-dashboard-amd64:v1.8.0,kubernetes-dashboard-init-amd64
 
 services:
   - docker
