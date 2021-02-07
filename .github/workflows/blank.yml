@@ -22,15 +22,17 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: ls -la && echo ${DOCKER_REGISTRY_HOST}
+        env:
+          DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PWD: ${{ secrets.DOCKER_PWD }}
+          DOCKER_FROM_PROJECT: ${{ secrets.DOCKER_FROM_PROJECT }}
+          DOCKER_TO_PROJECT: ${{ secrets.DOCKER_TO_PROJECT }}
+          COPY_IMAGES: ${{ secrets.COPY_IMAGES }}
+          IMAGES_VERSION: ${{ secrets.IMAGES_VERSION }}
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+
