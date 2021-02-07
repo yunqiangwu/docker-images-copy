@@ -23,12 +23,12 @@ if [[ x$IMAGES_VERSION == x ]]; then
 fi
 
 if [[ x$COPY_IMAGES == x ]]; then 
-  export COPY_IMAGES=mysql,redis
+  # export COPY_IMAGES=mysql,redis
   echo "not set args"
   exit 1
 fi
 
-# docker login $DOCKER_REGISTRY_HOST -u $DOCKER_USER -p $DOCKER_PWD
+docker login $DOCKER_REGISTRY_HOST -u $DOCKER_USER -p $DOCKER_PWD
 
 OLD_IFS="$IFS"
 IFS=","
