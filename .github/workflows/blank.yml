@@ -28,7 +28,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: sh docker-image-rename.sh
+        run: /bin/bash docker-image-rename.sh
         env:
           DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
