@@ -7,12 +7,16 @@
 # curl -s https://raw.githubusercontent.com/yunqiangwu/docker-images-copy/master/docker-image-rename.sh | sh
 
 
-# DOCKER_REGISTRY_HOST=registry.saas.hand-china.com
-# DOCKER_USER=yunqiang.wu
-# DOCKER_PWD=Wu950429
-# DOCKER_FROM_PROJECT=gcr.io/google_containers
-# DOCKER_TO_PROJECT=registry.saas.hand-china.com/google_containers2
-# COPY_IMAGES
+
+# export DOCKER_REGISTRY_HOST=registry.cn-hangzhou.aliyuncs.com
+# export DOCKER_USER=username
+# export DOCKER_PWD=password
+
+# export DOCKER_FROM_PROJECT=gcr.io/gitpod-io/self-hosted
+# export DOCKER_TO_PROJECT=registry.cn-hangzhou.aliyuncs.com/gitpod
+# export COPY_IMAGES=content-service,messagebus,node-daemon,server,proxy,registry-facade,theia-server,ws-daemon,ws-manager,ws-manager-bridge,ws-proxy,ws-scheduler,theia-ide,ide/code,supervisor,docker-up,seccomp-profile-installer,blobserve,dashboard,image-builder,service-waiter,db-migrations
+# export IMAGES_VERSION=0.6.0
+
 
 
 if [[ x$COPY_IMAGES == x ]]; then 
